@@ -35,6 +35,7 @@ func AddTask(args []string) {
 func ListTasks() {
 	if len(Tasks) == 0 {
 		fmt.Println("Список задач пуст")
+		return
 	}
 
 	for i, task := range Tasks {
@@ -50,6 +51,7 @@ func LoadTasks() {
 	_, err := os.Stat("tasks.json")
 	if err != nil {
 		fmt.Println("Файл не найден")
+		return
 	} else {
 		data, _ := os.ReadFile("tasks.json")
 		_ = json.Unmarshal(data, &Tasks)
@@ -69,6 +71,7 @@ func DoneTask(args []string) {
 	LoadTasks()
 	if len(args) == 0 {
 		fmt.Println("Нужно ввести номер задачи")
+		return
 	}
 
 	id, err := strconv.Atoi(args[0])
@@ -91,6 +94,7 @@ func DeleteTask(args []string) {
 	LoadTasks()
 	if len(args) == 0 {
 		fmt.Println("Нужно ввести номер задачи")
+		return
 	}
 
 	id, err := strconv.Atoi(args[0])
