@@ -86,3 +86,25 @@ func DoneTask(args []string) {
 	}
 	SaveTask()
 }
+
+func DeleteTask(args []string) {
+	LoadTasks()
+	if len(args) == 0 {
+		fmt.Println("Нужно ввести номер задачи")
+	}
+
+	id, err := strconv.Atoi(args[0])
+	if err != nil {
+		fmt.Println("Номер задачи должен быть числом")
+		return
+	}
+
+	for i, task := range Tasks {
+		if task.ID == id {
+			Tasks = append(Tasks[:i], Tasks[i+1:]...)
+			fmt.Printf("Задача %d удалена: %s\n", id, task.Text)
+			break
+		}
+	}
+	SaveTask()
+}

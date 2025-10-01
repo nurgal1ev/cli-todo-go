@@ -24,5 +24,7 @@ func main() {
     	commands.ListTasks()
 	case "done":
 		commands.DoneTask(os.Args[2:])
+	case "delete":
+		commands.DeleteTask(os.Args[2:])
 	}
 }
