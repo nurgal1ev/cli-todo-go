@@ -2,34 +2,36 @@ package commands
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
-	"strings"
 	"strconv"
 )
 
+type AddTaskData struct {
+	Text string `json:"text"`
+}
 type Task struct {
-	ID   int
-	Text string
-	Done bool
+	ID   int    `json:"id"`
+	Text string `json:"text"`
+	Done bool   `json:"done"`
 }
 
 var Tasks []Task
 
-func AddTask(args []string) {
-	if len(args) == 0 {
-		fmt.Println("Нужно ввести текст задачи")
-		return
+func AddTask(a *AddTaskData) error {
+	if a.Text == "" {
+		return errors.New("empty text")
 	}
 
-	text := strings.Join(args, " ")
 	task := Task{
 		ID:   len(Tasks) + 1,
-		Text: text,
+		Text: a.Text,
 		Done: false,
 	}
 	Tasks = append(Tasks, task)
-	fmt.Printf("Добавлено: %d. [ ] %s\n", len(Tasks), text)
+	fmt.Printf("Добавлено: %d. [ ] %s\n", len(Tasks), a.Text)
+	return nil
 }
 
 func ListTasks() {
@@ -62,7 +64,7 @@ func SaveTask() {
 	jsonData, err := json.MarshalIndent(Tasks, "", " ")
 	if err != nil {
 		fmt.Println("Error:", err)
-        return
+		return
 	}
 	_ = os.WriteFile("tasks.json", jsonData, 0644)
 }

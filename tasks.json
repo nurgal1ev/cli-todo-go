@@ -1,12 +1,17 @@
 [
  {
-  "ID": 1,
-  "Text": "написать todo",
-  "Done": true
+  "id": 1,
+  "text": "1",
+  "done": false
  },
  {
-  "ID": 3,
-  "Text": "играть в доту",
-  "Done": true
+  "id": 2,
+  "text": "2",
+  "done": false
+ },
+ {
+  "id": 3,
+  "text": "3",
+  "done": false
  }
 ]
