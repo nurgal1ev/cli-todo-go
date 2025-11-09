@@ -2,12 +2,7 @@
  {
   "id": 1,
   "text": "1",
-  "done": false
- },
- {
-  "id": 2,
-  "text": "2",
-  "done": false
+  "done": true
  },
  {
   "id": 3,
